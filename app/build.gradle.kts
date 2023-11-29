@@ -44,6 +44,7 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment:2.7.1")
     implementation("androidx.navigation:navigation-ui:2.7.1")
 
+    implementation("androidx.recyclerview:recyclerview:1.1.0")
     implementation(platform("org.jetbrains.kotlin:kotlin-bom:1.8.0"))
 
     testImplementation("junit:junit:4.13.2")

@@ -67,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
                                 int day = taskDueDate.getDayOfMonth();
                                 LocalDate inputDate = LocalDate.of(year, month, day);
                                     tasks.add(new Task(userTextInput,inputDate));
+
                             }
                         })
                         .setNegativeButton("Cancel", null)
