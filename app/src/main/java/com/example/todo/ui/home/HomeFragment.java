@@ -6,16 +6,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.todo.MainActivity;
+import com.example.todo.R;
+
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.todo.Task;
 import com.example.todo.databinding.FragmentHomeBinding;
+
+import java.util.ArrayList;
 
 public class HomeFragment extends Fragment {
 
     private FragmentHomeBinding binding;
+
+    private ArrayList<Task> tasks;
+
+    private RecyclerView recyclerView;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
@@ -25,9 +36,33 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final RecyclerView RecyclerView = binding.rvTodods;
-        //homeViewModel.getText().observe(getViewLifecycleOwner(), RecyclerView::setText);
+        //MainActivity mainActivity = (MainActivity) requireActivity();
+        //tasks = mainActivity.tasks; // Get the tasks from MainActivity
+        SetUpTestTask();
+        //this is the last bit to bind the recylcerview to the homefragment
+        //TODO: Connect the arraylst task to the recyclerview
+        RecyclerView recyclerView = root.findViewById(R.id.rvTodo);
+        TodoAdapter adapter;
+        adapter = new TodoAdapter(requireContext(),tasks);
+        recyclerView.setAdapter(adapter);
+        recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+
         return root;
+    }
+
+    private void SetUpTestTask (){
+
+            tasks= new ArrayList<Task>();
+            ArrayList<String> dummyNames = new ArrayList<String>();
+            dummyNames.add("John");
+            dummyNames.add("carol");
+            dummyNames.add("Barbra");
+            dummyNames.add("Susan");
+            dummyNames.add("Dave");
+            dummyNames.add("task 6");
+            for ( int i=0; i<dummyNames.size(); i++ ){
+                tasks.add(new Task(dummyNames.get(i)));
+            }
     }
 
     @Override

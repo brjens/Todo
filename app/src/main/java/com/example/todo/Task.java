@@ -16,12 +16,26 @@ public class Task {
             dueDate = date;
         }
 
+        public Task(String name){
+            madeDate = LocalDate.now();
+            this.name = name;
+        }
+
         // Methods
         public void doSomething() {
             System.out.println("Doing something!");
         }
 
-        // Getter and Setter methods (optional)
+        // Getter and Setter methods
+
+        public String getName() {
+        return name;
+    }
+
+         public void setName(String name) {
+        this.name = name;
+    }
+
         public LocalDate getMadeDate() {
             return madeDate;
         }
@@ -43,4 +57,12 @@ public class Task {
 
         }
 
+    @Override
+    public String toString() {
+        return "Task{" +
+                "madeDate=" + madeDate +
+                ", dueDate=" + dueDate +
+                ", name='" + name + '\'' +
+                '}';
+    }
 }
