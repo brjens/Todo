@@ -40,35 +40,16 @@ public class HomeFragment extends Fragment {
         View root = binding.getRoot();
 
         MainActivity mainActivity = (MainActivity) requireActivity();
-        tasks = (ArrayList<Task>) mainActivity.tasks; // Get the tasks from MainActivity
-        //SetUpTestTask();
+        tasks = mainActivity.tasks; // Get the tasks from MainActivity
+        adapter = new TodoAdapter(requireContext(),tasks);
         //this is the last bit to bind the recylcerview to the homefragment
         //TODO: Connect the arraylst task to the recyclerview
         RecyclerView recyclerView = root.findViewById(R.id.rvTodo);
-        adapter = new TodoAdapter(requireContext(),tasks);
-        recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
+        recyclerView.setAdapter(adapter);
 
         return root;
     }
-
-    private void SetUpTestTask (){
-
-            tasks= new ArrayList<Task>();
-            ArrayList<String> dummyNames = new ArrayList<String>();
-            dummyNames.add("John");
-            dummyNames.add("carol");
-            dummyNames.add("Barbra");
-            dummyNames.add("Susan");
-            dummyNames.add("Dave");
-            dummyNames.add("task 6");
-            for ( int i=0; i<dummyNames.size(); i++ ){
-                tasks.add(new Task(dummyNames.get(i)));
-            }
-    }
-
-
-
 
     @Override
     public void onDestroyView() {
@@ -76,9 +57,16 @@ public class HomeFragment extends Fragment {
         binding = null;
     }
 
-    public void updateRecyclerView() {
+    public void updateRecyclerView(ArrayList<Task> updatedTasks) {
         if (adapter != null) {
-            adapter.notifyDataSetChanged();
+            adapter.updateTasks(updatedTasks);
+        }
+    }
+
+    public void updateTasks(ArrayList<Task> updatedTasks) {
+        this.tasks = updatedTasks;
+        if (adapter != null) {
+            adapter.updateTasks(tasks); // Update tasks in adapter
         }
     }
 }

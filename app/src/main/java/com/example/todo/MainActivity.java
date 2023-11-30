@@ -13,6 +13,7 @@ import com.example.todo.ui.home.HomeFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -30,11 +31,13 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-    public List<Task> tasks = new ArrayList<>();
+    public ArrayList<Task> tasks = new ArrayList<>();
 
     private String m_Text;
 
     private boolean showDialog = false;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,20 +53,17 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
-                // setting up the variable to retrieve the user input
                 View dialogView = LayoutInflater.from(MainActivity.this).inflate(R.layout.dialog_add_task, null);
                 EditText taskNameEditTask = dialogView.findViewById(R.id.taskNameEditText);
                 DatePicker taskDueDate = dialogView.findViewById(R.id.taskDueDatePicker);
 
                 new AlertDialog.Builder(MainActivity.this)
                         .setTitle("Add Task")
-                        .setView(R.layout.dialog_add_task) // Inflate your custom layout here
+                        .setView(dialogView) // Set the inflated view here
                         .setMessage("Enter task name and due date:")
                         .setPositiveButton("Add", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-
-                                //Log.d("UserInput", "Value from EditText: " + userTextInput); // Logging the user input
 
                                 String userTextInput = taskNameEditTask.getText().toString();
                                 int year = taskDueDate.getYear();
@@ -111,9 +111,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void notifyHomeFragment() {
-        HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("homeFragmentTag");
+        HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("nav_home");
         if (homeFragment != null) {
-            homeFragment.updateRecyclerView(); // Method to update RecyclerView in HomeFragment
+            homeFragment.updateTasks(tasks); // Method to update tasks in HomeFragment
         }
     }
 

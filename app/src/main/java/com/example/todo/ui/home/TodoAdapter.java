@@ -68,4 +68,9 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.MyViewHolder> 
             todoCheck = itemView.findViewById(R.id.cbTaskDone);
         }
     }
+
+    public void updateTasks(ArrayList<Task> updatedTasks) {
+        this.taskList = updatedTasks;
+        notifyDataSetChanged(); // Notify RecyclerView about dataset change
+    }
 }
