@@ -28,6 +28,9 @@ public class HomeFragment extends Fragment {
 
     private RecyclerView recyclerView;
 
+    private TodoAdapter adapter;
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
@@ -36,13 +39,12 @@ public class HomeFragment extends Fragment {
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        //MainActivity mainActivity = (MainActivity) requireActivity();
-        //tasks = mainActivity.tasks; // Get the tasks from MainActivity
-        SetUpTestTask();
+        MainActivity mainActivity = (MainActivity) requireActivity();
+        tasks = (ArrayList<Task>) mainActivity.tasks; // Get the tasks from MainActivity
+        //SetUpTestTask();
         //this is the last bit to bind the recylcerview to the homefragment
         //TODO: Connect the arraylst task to the recyclerview
         RecyclerView recyclerView = root.findViewById(R.id.rvTodo);
-        TodoAdapter adapter;
         adapter = new TodoAdapter(requireContext(),tasks);
         recyclerView.setAdapter(adapter);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
@@ -65,9 +67,18 @@ public class HomeFragment extends Fragment {
             }
     }
 
+
+
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         binding = null;
+    }
+
+    public void updateRecyclerView() {
+        if (adapter != null) {
+            adapter.notifyDataSetChanged();
+        }
     }
 }

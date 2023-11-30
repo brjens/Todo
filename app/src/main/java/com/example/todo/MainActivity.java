@@ -2,12 +2,14 @@ package com.example.todo;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Menu;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
+import com.example.todo.ui.home.HomeFragment;
 import com.google.android.material.navigation.NavigationView;
 
 import androidx.appcompat.app.AlertDialog;
@@ -28,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private AppBarConfiguration mAppBarConfiguration;
     private ActivityMainBinding binding;
-    public List<Task> tasks;
+    public List<Task> tasks = new ArrayList<>();
 
     private String m_Text;
 
@@ -61,12 +63,17 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
 
+                                //Log.d("UserInput", "Value from EditText: " + userTextInput); // Logging the user input
+
                                 String userTextInput = taskNameEditTask.getText().toString();
                                 int year = taskDueDate.getYear();
                                 int month = taskDueDate.getMonth();
                                 int day = taskDueDate.getDayOfMonth();
                                 LocalDate inputDate = LocalDate.of(year, month, day);
-                                    tasks.add(new Task(userTextInput,inputDate));
+
+                                Log.d("UserInput", "Value from EditText: " + userTextInput); // Logging the user input
+
+                                addTask(new Task(userTextInput,inputDate));
 
                             }
                         })
@@ -97,6 +104,19 @@ public class MainActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.main, menu);
         return true;
     }
+
+    public void addTask(Task task) {
+        tasks.add(task);
+        notifyHomeFragment();
+    }
+
+    private void notifyHomeFragment() {
+        HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("homeFragmentTag");
+        if (homeFragment != null) {
+            homeFragment.updateRecyclerView(); // Method to update RecyclerView in HomeFragment
+        }
+    }
+
 
     @Override
     public boolean onSupportNavigateUp() {
