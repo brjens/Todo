@@ -8,4 +8,4 @@
 
 - **Language:** Java XML
 - **Frameworks/Libraries:** Android SDK, Material Components
-- **Architecture:** MVVM (Model-View-ViewModel)
+
