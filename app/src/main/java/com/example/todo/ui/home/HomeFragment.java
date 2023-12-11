@@ -43,7 +43,6 @@ public class HomeFragment extends Fragment {
         tasks = mainActivity.tasks; // Get the tasks from MainActivity
         adapter = new TodoAdapter(requireContext(),tasks);
         //this is the last bit to bind the recylcerview to the homefragment
-        //TODO: Connect the arraylst task to the recyclerview
         RecyclerView recyclerView = root.findViewById(R.id.rvTodo);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(adapter);

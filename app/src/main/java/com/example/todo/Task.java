@@ -8,6 +8,7 @@ public class Task {
         private LocalDate madeDate;
         private LocalDate dueDate;
         private String name;
+        private Boolean isCompleted;
 
         // Constructor
         public Task(String name, LocalDate date ) {
@@ -28,7 +29,15 @@ public class Task {
 
         // Getter and Setter methods
 
-        public String getName() {
+    public Boolean getCompleted() {
+        return isCompleted;
+    }
+
+    public void setCompleted(Boolean completed) {
+        isCompleted = completed;
+    }
+
+    public String getName() {
         return name;
     }
 
@@ -61,6 +70,7 @@ public class Task {
     public String toString() {
         return "Task{" +
                 "madeDate=" + madeDate +
+                ", isCompleted=" + isCompleted +
                 ", dueDate=" + dueDate +
                 ", name='" + name + '\'' +
                 '}';

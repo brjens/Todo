@@ -110,6 +110,11 @@ public class MainActivity extends AppCompatActivity {
         notifyHomeFragment();
     }
 
+    public void removeTask(Task task){
+        tasks.remove(task);
+        notifyHomeFragment();
+    }
+
     private void notifyHomeFragment() {
         HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("nav_home");
         if (homeFragment != null) {
