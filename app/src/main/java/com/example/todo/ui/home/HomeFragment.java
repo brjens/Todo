@@ -20,7 +20,9 @@ import com.example.todo.databinding.FragmentHomeBinding;
 
 import java.util.ArrayList;
 
-public class HomeFragment extends Fragment {
+public class HomeFragment extends Fragment implements RecyclerViewInterface{
+
+
 
     private FragmentHomeBinding binding;
 
@@ -31,19 +33,21 @@ public class HomeFragment extends Fragment {
     private TodoAdapter adapter;
 
 
+
+
+
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         HomeViewModel homeViewModel =
                 new ViewModelProvider(this).get(HomeViewModel.class);
-
+        adapter = new TodoAdapter(requireContext(),tasks, this);
         binding = FragmentHomeBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
         MainActivity mainActivity = (MainActivity) requireActivity();
         tasks = mainActivity.tasks; // Get the tasks from MainActivity
-        adapter = new TodoAdapter(requireContext(),tasks);
+        adapter = new TodoAdapter(requireContext(),tasks, this);
         //this is the last bit to bind the recylcerview to the homefragment
-        //TODO: Connect the arraylst task to the recyclerview
         RecyclerView recyclerView = root.findViewById(R.id.rvTodo);
         recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
         recyclerView.setAdapter(adapter);
@@ -68,5 +72,17 @@ public class HomeFragment extends Fragment {
         if (adapter != null) {
             adapter.updateTasks(tasks); // Update tasks in adapter
         }
+    }
+
+    @Override
+    public void onCheck(int pos) {
+        //what code I want to run when the bo is checked
+    }
+
+    @Override
+    public void onItemClick(int pos) {
+        //what code I want to run when a taskcard
+        tasks.remove(pos);
+        adapter.notifyItemRemoved(pos);
     }
 }
