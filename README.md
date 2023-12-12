@@ -12,6 +12,11 @@ needlessly complicated to learn. I also decided to use recylcerView which is pro
 
 - RecyclerView doesn't seem to update after adding a task, you need to add another or switch fragments back and forth
 
+## Next-features
+
+- Store data on application suspend
+- Simple notifications
+
 ## Technologies Used
 
 - **Language:** Java XML Junit
