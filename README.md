@@ -1,7 +1,7 @@
 # ToDo App
 
 A small simple app I'm making to improve and display my skills. I made the app in linux, used all the git version control in CLI and I write the readme in Vim. 
-needlessly complicated to learn. I also decided to use recylcerView which is probably the most complicated way to display a list of mutable tasks. 
+I also decided to use recylcerView which is probably overly complicated. 
 
 ## Features
 
