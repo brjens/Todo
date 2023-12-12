@@ -15,13 +15,20 @@ public class Task {
             madeDate = LocalDate.now();
             this.name = name;
             dueDate = date;
+            this.isCompleted = false;
         }
 
         public Task(String name){
             madeDate = LocalDate.now();
             this.name = name;
+            this.isCompleted = false;
         }
 
+        public Task(){
+            madeDate = LocalDate.now();
+            this.name = "";
+            this.isCompleted = false;
+        }
         // Methods
         public void doSomething() {
             System.out.println("Doing something!");
@@ -41,7 +48,7 @@ public class Task {
         return name;
     }
 
-         public void setName(String name) {
+    public void setName(String name) {
         this.name = name;
     }
 
