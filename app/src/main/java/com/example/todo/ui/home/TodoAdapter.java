@@ -1,6 +1,7 @@
 package com.example.todo.ui.home;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,13 +18,15 @@ import java.util.ArrayList;
 
 public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.MyViewHolder> {
 
+    private final RecyclerViewInterface recyclerViewInterface;
     Context context;
     ArrayList<Task> taskList;
 
     //TodoAdapter constructor
-    public TodoAdapter(Context context, ArrayList<Task> taskList){
+    public TodoAdapter(Context context, ArrayList<Task> taskList, RecyclerViewInterface recyclerViewInterface){
         this.context=context;
         this.taskList=taskList;
+        this.recyclerViewInterface = recyclerViewInterface;
     }
 
 
@@ -35,17 +38,13 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.MyViewHolder> 
         LayoutInflater inflater = LayoutInflater.from(context);
         View view = inflater.inflate(R.layout.todo_item, parent, false);
 
-        return new TodoAdapter.MyViewHolder(view);
+        return new TodoAdapter.MyViewHolder(view, recyclerViewInterface);
     }
 
     @Override
     public void onBindViewHolder(@NonNull TodoAdapter.MyViewHolder holder, int position) {
         //assigns the values to each off our list items in the Todo_item
         //based on position of reclyer view
-
-        //tells the adaptor to update the data on each of our items, changnithe the values within each of the holders that's passed in
-        //in this case we only update the name of the task since checkbox doesn't change
-        //add the dude date later when you finshed the recylcer view and it works
         holder.todoText.setText(taskList.get(position).getName());
 
     }
@@ -61,11 +60,26 @@ public class TodoAdapter extends RecyclerView.Adapter<TodoAdapter.MyViewHolder> 
         //it takes the views rom our todo_item layout xml and stoes it in a local variable
         TextView todoText;
         CheckBox todoCheck;
-        public MyViewHolder(@NonNull View itemView) {
+        public MyViewHolder(@NonNull View itemView, RecyclerViewInterface recyclerViewInterface) {
             super(itemView);
 
             todoText = itemView.findViewById(R.id.tvTaskName);
             todoCheck = itemView.findViewById(R.id.cbTaskDone);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (recyclerViewInterface != null){
+                        int pos = getAdapterPosition();
+
+                        if (pos != RecyclerView.NO_POSITION){
+                            recyclerViewInterface.onItemClick(pos);
+                        }
+                    }
+                }
+            });
+
+
         }
     }
 
