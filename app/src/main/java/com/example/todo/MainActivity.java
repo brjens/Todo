@@ -107,10 +107,17 @@ public class MainActivity extends AppCompatActivity {
         notifyHomeFragment();
     }
 
+    //adding the else block fixed the refresh issue
     private void notifyHomeFragment() {
-        HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentByTag("nav_home");
+        HomeFragment homeFragment = (HomeFragment) getSupportFragmentManager().findFragmentById(R.id.fragment_home);
         if (homeFragment != null) {
             homeFragment.updateTasks(tasks); // Method to update tasks in HomeFragment
+        }
+        else{
+            homeFragment = new HomeFragment();
+            getSupportFragmentManager().beginTransaction()
+                    .add(R.id.fragment_home, homeFragment)
+                    .commit();
         }
     }
 
