@@ -4,28 +4,25 @@ import android.content.DialogInterface;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.Menu;
+import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
 
-import com.example.todo.ui.home.HomeFragment;
-import com.google.android.material.navigation.NavigationView;
-
 import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
-import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.todo.databinding.ActivityMainBinding;
+import com.example.todo.ui.home.HomeFragment;
+import com.google.android.material.navigation.NavigationView;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -107,11 +104,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void addTask(Task task) {
         tasks.add(task);
-        notifyHomeFragment();
-    }
-
-    public void removeTask(Task task){
-        tasks.remove(task);
         notifyHomeFragment();
     }
 
