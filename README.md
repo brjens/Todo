@@ -1,7 +1,7 @@
 # ToDo App
 
-A small simple app I'm making to improve and display my skills. I made the app in linux, used all the git version control in CLI and I write the readme in Vim. 
-I also decided to use recylcerView which is probably overly complicated. 
+A small simple app I'm making to improve and display my skills. I made the app in linux, used git CLI and I write the readme in Vim. 
+This could be done better if I'd not started with a navigationdrawer layout. Before this I'd never worked with fragments or recyclerview.
 
 ## Features
 
